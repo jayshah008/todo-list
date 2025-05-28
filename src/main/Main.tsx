@@ -13,7 +13,7 @@ function Main() {
     }
 
     const listItems = Items.map(item => 
-        <li>{item}</li>
+        <li>{item} <button>Finished</button></li>
     )
         
 
@@ -22,12 +22,13 @@ function Main() {
 
         <div className="MainContent">
 
-            <div className="list">
-                No tasks yet.....
-            </div>
-
             <div className="listItems">
+
+                {Items.length == 0 ?
+                "No Items added yet..."
+                :
                 <ul>{listItems}</ul>
+                }
             </div>
 
             <input type="text" value = {ItemValue} onChange={(e) => {setItemValue(e.target.value)}}/>

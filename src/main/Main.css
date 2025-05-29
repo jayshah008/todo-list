@@ -11,3 +11,10 @@
 ul.listItems{
     list-style-type: none;
 }
+
+li.listItems{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 25px;
+}

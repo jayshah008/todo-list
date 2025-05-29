@@ -1,6 +1,7 @@
 import './Main.css'
 import { useState } from 'react';
 import { CiCircleCheck } from "react-icons/ci";
+import { IoPencil } from "react-icons/io5";
 
 
 
@@ -15,13 +16,16 @@ function Main() {
     const [ItemValue, setItemValue] = useState('');
     const [Items, setItems] = useState<itemList[]>([]);
     const [id_Item, setId] = useState<number>(0);
-    const [date, setDate] = useState("");
+    const [date, setDate] = useState(new Date().toLocaleDateString());
 
     function addItems(){
         setItems([...Items, {id : id_Item, value: ItemValue, dateValue : date}])
         setItemValue('');
         setId(id_Item => id_Item+1);
-        setDate("");
+        setDate(new Date().toLocaleDateString());
+    }
+
+    const editItem = (ItemId : number) => {
     }
 
     const removeItem = (ItemId : number) => {
@@ -29,7 +33,10 @@ function Main() {
     }
 
     const listItems = Items.map(item => 
-        <li> <CiCircleCheck  onClick={() => removeItem(item.id)}/> {item.value} - {item.dateValue}<button onClick={() => removeItem(item.id)}>Finished</button></li>
+        <li className='listItems'> <CiCircleCheck  onClick={() => removeItem(item.id)}/> 
+        <span>{item.value} - {item.dateValue}</span>
+        <IoPencil onClick={() => editItem(item.id)}/>
+        <button onClick={() => removeItem(item.id)}>Finished</button></li>
     )
         
 
@@ -52,7 +59,13 @@ function Main() {
                 }
             </div>
 
-            <input type="text" value = {ItemValue} onChange={(e) => {setItemValue(e.target.value)}}/>
+            <input type="text" value = {ItemValue} onChange={(e) => {setItemValue(e.target.value)}}
+            onKeyDown={(e) => {
+                if(e.key == 'Enter'){
+                    addItems();
+                }
+            }}
+            />
             <input type="date" value={date} onChange={(e) => {setDate(e.target.value)}}/>
             <button onClick={addItems}>Add Task</button>
 

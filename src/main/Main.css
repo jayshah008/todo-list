@@ -1,3 +1,13 @@
 .MainContent{
     padding-left: 10%;
 }
+
+.headerContent{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul.listItems{
+    list-style-type: none;
+}
